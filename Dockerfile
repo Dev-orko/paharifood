@@ -15,12 +15,12 @@ COPY vite.config.js tailwind.config.js postcss.config.js jsconfig.json ./
 RUN npm run build
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Stage 2: PHP — install composer deps + final image
+# Stage 2: PHP (Debian) — stable packages, no Alpine header issues
 # ─────────────────────────────────────────────────────────────────────────────
-FROM php:8.2-fpm-alpine
+FROM php:8.2-fpm
 
 # ── System packages ───────────────────────────────────────────────────────────
-RUN apk add --no-cache \
+RUN apt-get update && apt-get install -y --no-install-recommends \
         nginx \
         supervisor \
         curl \
@@ -29,12 +29,11 @@ RUN apk add --no-cache \
         libpng-dev \
         libzip-dev \
         libpq-dev \
-        oniguruma-dev \
-        freetype-dev \
-        libjpeg-turbo-dev \
-        icu-dev \
-        icu-libs \
-    && rm -rf /var/cache/apk/*
+        libonig-dev \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libicu-dev \
+    && rm -rf /var/lib/apt/lists/*
 
 # ── PHP extensions ────────────────────────────────────────────────────────────
 RUN docker-php-ext-configure gd \
@@ -54,6 +53,9 @@ RUN docker-php-ext-configure gd \
 # ── Composer ──────────────────────────────────────────────────────────────────
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+ENV COMPOSER_ALLOW_SUPERUSER=1 \
+    COMPOSER_MEMORY_LIMIT=-1
+
 WORKDIR /var/www/html
 
 # ── Install PHP dependencies ──────────────────────────────────────────────────
@@ -68,10 +70,10 @@ RUN composer install \
 # ── Copy application source ───────────────────────────────────────────────────
 COPY . .
 
-# ── Copy built frontend assets from stage 1 ──────────────────────────────────
+# ── Copy built frontend assets from Stage 1 ──────────────────────────────────
 COPY --from=node_builder /app/public/build ./public/build
 
-# ── Regenerate autoloader with full app source ────────────────────────────────
+# ── Regenerate autoloader with full source ────────────────────────────────────
 RUN composer dump-autoload --optimize --no-dev --no-scripts
 
 # ── Copy Docker config files ──────────────────────────────────────────────────
@@ -81,7 +83,7 @@ COPY docker/php-fpm.conf     /usr/local/etc/php-fpm.d/www.conf
 COPY docker/opcache.ini      /usr/local/etc/php/conf.d/opcache.ini
 COPY docker/start.sh         /start.sh
 
-# ── Permissions ───────────────────────────────────────────────────────────────
+# ── Permissions & storage dirs ────────────────────────────────────────────────
 RUN chmod +x /start.sh \
     && mkdir -p storage/framework/{cache/data,sessions,views,testing} \
                storage/logs \
