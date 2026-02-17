@@ -28,6 +28,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         unzip \
         libpng-dev \
         libzip-dev \
+    libxml2-dev \
         libpq-dev \
         libonig-dev \
         libfreetype6-dev \
@@ -44,7 +45,7 @@ RUN docker-php-ext-configure gd \
         pdo_pgsql \
         pgsql \
         mbstring \
-    xml \
+        xml \
         zip \
         gd \
         bcmath \
