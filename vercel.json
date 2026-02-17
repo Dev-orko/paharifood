@@ -1,0 +1,34 @@
+{
+    "version": 2,
+    "framework": null,
+    "installCommand": "npm ci",
+    "buildCommand": "npm run build",
+    "functions": {
+        "api/index.php": {
+            "runtime": "vercel-php@0.7.2"
+        }
+    },
+    "routes": [
+        { "src": "/build/(.*)",      "dest": "/public/build/$1" },
+        { "src": "/storage/(.*)",    "dest": "/public/storage/$1" },
+        { "src": "/favicon\\.svg",   "dest": "/public/favicon.svg" },
+        { "src": "/favicon\\.ico",   "dest": "/public/favicon.ico" },
+        { "src": "/og-image\\.svg",  "dest": "/public/og-image.svg" },
+        { "src": "/robots\\.txt",    "dest": "/public/robots.txt" },
+        { "src": "/sitemap\\.xml",   "dest": "/public/sitemap.xml" },
+        { "src": "/(.*)",            "dest": "/api/index.php" }
+    ],
+    "env": {
+        "APP_ENV":               "production",
+        "APP_DEBUG":             "false",
+        "LOG_CHANNEL":           "stderr",
+        "DB_CONNECTION":         "sqlite",
+        "DB_DATABASE":           "/tmp/database.sqlite",
+        "CACHE_STORE":           "array",
+        "SESSION_DRIVER":        "cookie",
+        "SESSION_ENCRYPT":       "true",
+        "QUEUE_CONNECTION":      "sync",
+        "BROADCAST_CONNECTION":  "log",
+        "FILESYSTEM_DISK":       "local"
+    }
+}
