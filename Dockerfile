@@ -44,6 +44,7 @@ RUN docker-php-ext-configure gd \
         pdo_pgsql \
         pgsql \
         mbstring \
+    xml \
         zip \
         gd \
         bcmath \
