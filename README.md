@@ -1,4 +1,166 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center">
+  <img src="public/og-image.svg" width="600" alt="পাহাড়ি স্বাদ — Hill Taste">
+</p>
+
+<h1 align="center">পাহাড়ি স্বাদ — Hill Taste 🏔️</h1>
+
+<p align="center">
+  <strong>Authentic Hill Flavors, Delivered Fresh to Your Doorstep</strong><br>
+  A full-featured e-commerce platform built with Laravel 12 + Vue 3 + Inertia.js
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-12-red?logo=laravel" alt="Laravel">
+  <img src="https://img.shields.io/badge/Vue-3-42b883?logo=vue.js" alt="Vue 3">
+  <img src="https://img.shields.io/badge/Inertia.js-purple?logo=inertia" alt="Inertia">
+  <img src="https://img.shields.io/badge/Vite-7-646CFF?logo=vite" alt="Vite">
+  <img src="https://img.shields.io/badge/TailwindCSS-3-38bdf8?logo=tailwindcss" alt="Tailwind">
+  <img src="https://img.shields.io/badge/PHP-8.4-8892BF?logo=php" alt="PHP">
+</p>
+
+---
+
+## ✨ Features
+
+- 🛒 **Full E-Commerce** — Product browsing, cart, checkout, order tracking
+- 🔍 **Search & Filters** — By category, keyword, and price
+- ❤️ **Wishlist** — Save products for later
+- 👤 **Account Settings** — Profile, avatar upload, shipping/billing address, password, notification preferences
+- 🔐 **Authentication** — Register, login, password reset (Laravel Breeze + Inertia)
+- 🎨 **Premium UI** — Dark navbar with animated dropdown, hero slider, testimonials, newsletter
+- 📱 **Fully Responsive** — Mobile-first design
+- 🌐 **SEO Ready** — Open Graph, Twitter Card, JSON-LD structured data, sitemap.xml
+- 🏔️ **Branded** — পাহাড়ি স্বাদ mountain theme throughout
+- 🌿 **Bengali + English** — Bilingual UI (bn-BD)
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Backend | Laravel 12, PHP 8.4 |
+| Frontend | Vue 3, Inertia.js, Vite 7 |
+| Styling | Tailwind CSS 3 |
+| Database | SQLite (dev) / MySQL (prod) |
+| Auth | Laravel Breeze |
+| Storage | Laravel Storage (local disk) |
+
+---
+
+## 🚀 Local Setup
+
+### Prerequisites
+- PHP 8.2+
+- Composer
+- Node.js 18+
+- npm
+
+### Installation
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/Dev-orko/paharifood.git
+cd paharifood
+
+# 2. Install PHP dependencies
+composer install
+
+# 3. Install JS dependencies
+npm install
+
+# 4. Environment setup
+cp .env.example .env
+php artisan key:generate
+
+# 5. Run migrations + seed sample data
+php artisan migrate --seed
+
+# 6. Create storage symlink (for avatar uploads)
+php artisan storage:link
+
+# 7. Build frontend assets
+npm run build
+
+# 8. Start development server
+php artisan serve
+```
+
+Visit: **http://localhost:8000**
+
+### Development (with hot reload)
+
+```bash
+# Terminal 1
+php artisan serve
+
+# Terminal 2
+npm run dev
+```
+
+---
+
+## 📂 Project Structure
+
+```
+├── app/
+│   ├── Http/Controllers/    # AccountController, ProductController, CartController...
+│   └── Models/              # User, Product, Category, Order, Cart, Wishlist...
+├── database/
+│   ├── migrations/          # All table migrations
+│   └── seeders/             # CategorySeeder, ProductSeeder
+├── resources/
+│   ├── js/
+│   │   ├── Components/      # Navbar, Footer, HeroSlider, Products...
+│   │   ├── Pages/           # Welcome, CartPage, AccountSettings...
+│   │   └── composables/     # useCart, useWishlist, useNotification
+│   └── views/app.blade.php  # Root Inertia template (SEO meta, JSON-LD)
+├── public/
+│   ├── favicon.svg          # Branded SVG favicon
+│   ├── og-image.svg         # Social preview image (1200x630)
+│   ├── sitemap.xml          # SEO sitemap
+│   └── robots.txt           # Crawler rules
+└── routes/web.php           # All application routes
+```
+
+---
+
+## 🗃️ Database
+
+Default: **SQLite** (zero config for dev)
+
+To switch to MySQL, update `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=paharifood
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Then run: `php artisan migrate --seed`
+
+---
+
+## 🌐 Deployment
+
+1. Set `APP_ENV=production` and `APP_DEBUG=false` in `.env`
+2. Set `APP_URL=https://yourdomain.com`
+3. Run `php artisan config:cache && php artisan route:cache && php artisan view:cache`
+4. Run `npm run build`
+5. Point web server document root to `/public`
+
+---
+
+## 📄 License
+
+MIT License — free to use and modify.
+
+---
+
+<p align="center">Made with ❤️ for the hills of Bangladesh 🏔️</p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
