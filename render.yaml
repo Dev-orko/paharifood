@@ -1,0 +1,50 @@
+# Render Infrastructure-as-Code
+# Deploy: https://render.com/deploy (or connect your GitHub repo manually)
+# Docs: https://render.com/docs/yaml-spec
+
+services:
+  # ── Web Service ─────────────────────────────────────────────────────────────
+  - type: web
+    name: paharifood
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /up
+    envVars:
+      - key: APP_NAME
+        value: "পাহাড়ি স্বাদ"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_URL
+        fromService:
+          type: web
+          name: paharifood
+          property: host
+      - key: APP_KEY
+        sync: false  # Set manually: run `php artisan key:generate --show` and paste the value in Render dashboard
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DATABASE_URL
+        fromDatabase:
+          name: paharifood-db
+          property: connectionString
+      - key: CACHE_STORE
+        value: database
+      - key: SESSION_DRIVER
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: FILESYSTEM_DISK
+        value: local
+
+# ── PostgreSQL Database ──────────────────────────────────────────────────────
+databases:
+  - name: paharifood-db
+    plan: free
+    databaseName: paharifood
+    user: paharifood
