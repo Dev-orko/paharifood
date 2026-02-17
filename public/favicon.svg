@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d5c2e"/>
+      <stop offset="100%" stop-color="#1a8a45"/>
+    </linearGradient>
+    <linearGradient id="peak" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#e8f5e9" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="hill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Rounded square background -->
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+
+  <!-- Subtle background glow -->
+  <circle cx="32" cy="20" r="28" fill="white" opacity="0.04"/>
+
+  <!-- Back hill (left) -->
+  <path d="M2 48 L18 28 L34 48 Z" fill="#1e8449" opacity="0.6"/>
+
+  <!-- Back hill (right) -->
+  <path d="M30 48 L46 26 L62 48 Z" fill="#1e8449" opacity="0.5"/>
+
+  <!-- Main mountain -->
+  <path d="M10 52 L32 16 L54 52 Z" fill="url(#hill)"/>
+
+  <!-- Snow cap -->
+  <path d="M32 16 L25 31 L32 29 L39 31 Z" fill="url(#peak)"/>
+
+  <!-- Snow highlight line -->
+  <path d="M28 27 L32 16 L36 27" fill="none" stroke="white" stroke-width="0.8" stroke-opacity="0.5"/>
+
+  <!-- Ground line -->
+  <rect x="6" y="50" width="52" height="3" rx="1.5" fill="#27ae60" opacity="0.5"/>
+</svg>

@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Sky gradient -->
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a2e1a"/>
+      <stop offset="60%" stop-color="#0d5c2e"/>
+      <stop offset="100%" stop-color="#1a8a45"/>
+    </linearGradient>
+    <!-- Ground gradient -->
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d5c2e"/>
+      <stop offset="100%" stop-color="#073d1e"/>
+    </linearGradient>
+    <!-- Mountain fill -->
+    <linearGradient id="mtnMain" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#27ae60"/>
+      <stop offset="50%" stop-color="#1a8a45"/>
+      <stop offset="100%" stop-color="#0d5c2e"/>
+    </linearGradient>
+    <!-- Back mountain -->
+    <linearGradient id="mtnBack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e6b3d"/>
+      <stop offset="100%" stop-color="#0a3d20"/>
+    </linearGradient>
+    <!-- Snow -->
+    <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#d4f0e0"/>
+    </linearGradient>
+    <!-- Right panel -->
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="rgba(0,0,0,0.55)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.35)"/>
+    </linearGradient>
+    <!-- Green glow -->
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#27ae60" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#27ae60" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Noise filter for texture -->
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feBlend in="SourceGraphic" mode="multiply" result="blend"/>
+      <feComposite in="blend" in2="SourceGraphic" operator="in"/>
+    </filter>
+  </defs>
+
+  <!-- Background sky -->
+  <rect width="1200" height="630" fill="url(#sky)"/>
+
+  <!-- Subtle noise texture overlay -->
+  <rect width="1200" height="630" fill="url(#sky)" filter="url(#noise)" opacity="0.08"/>
+
+  <!-- Stars / dots -->
+  <circle cx="120" cy="80" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="280" cy="55" r="1" fill="white" opacity="0.4"/>
+  <circle cx="440" cy="95" r="2" fill="white" opacity="0.3"/>
+  <circle cx="70" cy="150" r="1" fill="white" opacity="0.4"/>
+  <circle cx="200" cy="35" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="350" cy="70" r="1" fill="white" opacity="0.35"/>
+  <circle cx="510" cy="45" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="580" cy="110" r="1" fill="white" opacity="0.3"/>
+
+  <!-- Ambient glow centre-left -->
+  <ellipse cx="300" cy="320" rx="350" ry="300" fill="url(#glow)"/>
+
+  <!-- Back mountains (far layer) -->
+  <polygon points="0,420 100,230 200,310 320,180 430,270 550,200 650,290 740,210 820,300 900,240 980,310 1060,250 1140,320 1200,280 1200,480 0,480" fill="url(#mtnBack)" opacity="0.55"/>
+
+  <!-- Mid mountains -->
+  <polygon points="0,480 80,350 160,400 260,290 360,370 460,310 560,380 660,300 750,370 860,295 940,360 1040,305 1120,360 1200,330 1200,510 0,510" fill="#0d5c2e" opacity="0.75"/>
+
+  <!-- Main hero mountain (centre-left) -->
+  <polygon points="120,510 320,210 520,510" fill="url(#mtnMain)"/>
+
+  <!-- Snow cap main mountain -->
+  <polygon points="320,210 268,330 320,300 372,330" fill="url(#snow)" opacity="0.92"/>
+  <line x1="320" y1="215" x2="330" y2="255" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+
+  <!-- Secondary mountain left -->
+  <polygon points="0,510 80,320 200,510" fill="#1a8a45" opacity="0.7"/>
+  <polygon points="80,320 60,380 80,360 100,380" fill="white" opacity="0.75"/>
+
+  <!-- Secondary mountain right of main -->
+  <polygon points="430,510 580,275 730,510" fill="#0d5c2e" opacity="0.8"/>
+  <polygon points="580,275 554,345 580,325 606,345" fill="white" opacity="0.8"/>
+
+  <!-- Ground strip -->
+  <rect x="0" y="505" width="730" height="125" fill="url(#ground)"/>
+
+  <!-- Trees row (decorative) -->
+  <g fill="#073d1e" opacity="0.7">
+    <polygon points="40,510 47,490 54,510"/>
+    <polygon points="60,510 68,486 76,510"/>
+    <polygon points="82,510 91,488 100,510"/>
+    <polygon points="108,510 118,483 128,510"/>
+    <polygon points="138,510 148,487 158,510"/>
+    <polygon points="168,510 176,492 184,510"/>
+    <polygon points="192,510 200,490 208,510"/>
+    <polygon points="214,510 222,488 230,510"/>
+    <polygon points="238,510 246,492 254,510"/>
+    <polygon points="260,510 270,485 280,510"/>
+    <polygon points="290,510 298,490 306,510"/>
+    <polygon points="314,510 322,493 330,510"/>
+    <polygon points="338,510 347,488 356,510"/>
+    <polygon points="365,510 373,492 381,510"/>
+    <polygon points="390,510 400,486 410,510"/>
+    <polygon points="420,510 430,490 440,510"/>
+    <polygon points="450,510 460,488 470,510"/>
+    <polygon points="480,510 488,492 496,510"/>
+    <polygon points="504,510 514,485 524,510"/>
+    <polygon points="534,510 542,490 550,510"/>
+    <polygon points="560,510 568,493 576,510"/>
+    <polygon points="585,510 593,489 601,510"/>
+    <polygon points="610,510 618,492 626,510"/>
+    <polygon points="635,510 645,486 655,510"/>
+    <polygon points="665,510 673,490 681,510"/>
+    <polygon points="692,510 700,488 708,510"/>
+    <polygon points="718,510 726,491 734,510"/>
+  </g>
+
+  <!-- ═══════════ RIGHT PANEL (Content area) ═══════════ -->
+  <rect x="700" y="0" width="500" height="630" fill="rgba(6,25,13,0.82)"/>
+
+  <!-- Right panel left border accent -->
+  <rect x="700" y="0" width="3" height="630" fill="#27ae60" opacity="0.8"/>
+
+  <!-- Top green accent line -->
+  <rect x="700" y="0" width="500" height="4" fill="url(#mtnMain)"/>
+
+  <!-- Logo / Icon area -->
+  <!-- Mountain icon -->
+  <g transform="translate(830, 100)">
+    <!-- Circle bg -->
+    <circle cx="70" cy="70" r="62" fill="#0d5c2e" opacity="0.6"/>
+    <circle cx="70" cy="70" r="60" fill="none" stroke="#27ae60" stroke-width="2" opacity="0.7"/>
+    <!-- Mini mountain in circle -->
+    <polygon points="70,22 32,105 108,105" fill="url(#mtnMain)"/>
+    <polygon points="70,22 56,58 70,50 84,58" fill="white" opacity="0.9"/>
+    <rect x="24" y="103" width="92" height="14" rx="4" fill="#073d1e" opacity="0.8"/>
+    <!-- Sparkle dots -->
+    <circle cx="28" cy="40" r="2" fill="#27ae60" opacity="0.9"/>
+    <circle cx="112" cy="40" r="2" fill="#27ae60" opacity="0.9"/>
+    <circle cx="24" cy="70" r="1.5" fill="#27ae60" opacity="0.6"/>
+    <circle cx="116" cy="70" r="1.5" fill="#27ae60" opacity="0.6"/>
+  </g>
+
+  <!-- Brand name in Bengali -->
+  <text x="950" y="250" font-family="'Noto Sans Bengali', 'Segoe UI', sans-serif" font-size="44" font-weight="700" fill="white" text-anchor="middle" opacity="0.97">পাহাড়ি স্বাদ</text>
+
+  <!-- English tagline -->
+  <text x="950" y="295" font-family="'Segoe UI', sans-serif" font-size="18" font-weight="400" fill="#27ae60" text-anchor="middle" letter-spacing="4">PAHADI SWAD</text>
+
+  <!-- Divider -->
+  <line x1="780" y1="318" x2="1120" y2="318" stroke="#27ae60" stroke-width="1" opacity="0.4"/>
+
+  <!-- Description text -->
+  <text x="950" y="355" font-family="'Segoe UI', sans-serif" font-size="16" fill="#b0d4bf" text-anchor="middle" opacity="0.9">Authentic Hill Flavors, Delivered Fresh</text>
+  <text x="950" y="383" font-family="'Segoe UI', sans-serif" font-size="16" fill="#b0d4bf" text-anchor="middle" opacity="0.9">to Your Doorstep</text>
+
+  <!-- Badges row -->
+  <g transform="translate(760, 415)">
+    <!-- Badge 1 -->
+    <rect x="0" y="0" width="115" height="36" rx="18" fill="#0d5c2e" opacity="0.8"/>
+    <text x="58" y="23" font-family="'Segoe UI', sans-serif" font-size="12" fill="#7ae8a8" text-anchor="middle">🌿 Organic</text>
+
+    <!-- Badge 2 -->
+    <rect x="125" y="0" width="115" height="36" rx="18" fill="#0d5c2e" opacity="0.8"/>
+    <text x="183" y="23" font-family="'Segoe UI', sans-serif" font-size="12" fill="#7ae8a8" text-anchor="middle">🏔️ Hill Fresh</text>
+
+    <!-- Badge 3 -->
+    <rect x="250" y="0" width="115" height="36" rx="18" fill="#0d5c2e" opacity="0.8"/>
+    <text x="308" y="23" font-family="'Segoe UI', sans-serif" font-size="12" fill="#7ae8a8" text-anchor="middle">⚡ Fast Ship</text>
+  </g>
+
+  <!-- Bottom website URL -->
+  <rect x="700" y="575" width="500" height="55" fill="rgba(13,92,46,0.5)"/>
+  <text x="950" y="610" font-family="'Segoe UI', sans-serif" font-size="15" fill="#7ae8a8" text-anchor="middle" letter-spacing="1" opacity="0.9">pahadiswad.com</text>
+
+  <!-- Bottom border -->
+  <rect x="700" y="626" width="500" height="4" fill="url(#mtnMain)"/>
+</svg>

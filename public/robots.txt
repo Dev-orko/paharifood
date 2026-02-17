@@ -1,0 +1,33 @@
+# ═══════════════════════════════════════════
+#  পাহাড়ি স্বাদ — Robots.txt
+#  https://pahadiswad.com
+# ═══════════════════════════════════════════
+
+User-agent: *
+Allow: /
+
+# Block internal / API / auth routes
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /account/
+Disallow: /_debugbar/
+Disallow: /sanctum/
+Disallow: /horizon/
+Disallow: /telescope/
+
+# Block server files
+Disallow: /storage/
+Disallow: /*.env$
+Disallow: /vendor/
+Disallow: /node_modules/
+
+# Allow static assets in build/
+Allow: /build/
+Allow: /favicon.svg
+Allow: /og-image.svg
+
+# Sitemap
+Sitemap: https://pahadiswad.com/sitemap.xml
+
+# Crawl delay (optional, for courtesy)
+Crawl-delay: 10
