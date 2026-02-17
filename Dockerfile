@@ -17,18 +17,30 @@ RUN npm run build
 # ─────────────────────────────────────────────────────────────────────────────
 # Stage 2: PHP — install composer deps + final image
 # ─────────────────────────────────────────────────────────────────────────────
-FROM php:8.2-fpm-alpine AS php_base
+FROM php:8.2-fpm-alpine
 
-# System deps + PHP extensions
+# ── System packages ───────────────────────────────────────────────────────────
 RUN apk add --no-cache \
         nginx \
         supervisor \
         curl \
+        git \
+        unzip \
         libpng-dev \
         libzip-dev \
-        postgresql-dev \
+        libpq-dev \
         oniguruma-dev \
-    && docker-php-ext-install \
+        freetype-dev \
+        libjpeg-turbo-dev \
+        icu-dev \
+        icu-libs \
+    && rm -rf /var/cache/apk/*
+
+# ── PHP extensions ────────────────────────────────────────────────────────────
+RUN docker-php-ext-configure gd \
+        --with-freetype \
+        --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
         pdo \
         pdo_pgsql \
         pgsql \
@@ -36,15 +48,15 @@ RUN apk add --no-cache \
         zip \
         gd \
         bcmath \
-        opcache \
-    && rm -rf /var/cache/apk/*
+        intl \
+        opcache
 
-# Composer
+# ── Composer ──────────────────────────────────────────────────────────────────
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copy composer files and install production deps
+# ── Install PHP dependencies ──────────────────────────────────────────────────
 COPY composer.json composer.lock ./
 RUN composer install \
         --no-dev \
@@ -53,22 +65,23 @@ RUN composer install \
         --prefer-dist \
         --optimize-autoloader
 
-# Copy application source
+# ── Copy application source ───────────────────────────────────────────────────
 COPY . .
 
-# Copy built frontend assets from stage 1
+# ── Copy built frontend assets from stage 1 ──────────────────────────────────
 COPY --from=node_builder /app/public/build ./public/build
 
-# Finish composer autoloader
-RUN composer dump-autoload --optimize --no-dev
+# ── Regenerate autoloader with full app source ────────────────────────────────
+RUN composer dump-autoload --optimize --no-dev --no-scripts
 
-# Copy Docker config files
+# ── Copy Docker config files ──────────────────────────────────────────────────
 COPY docker/nginx.conf       /etc/nginx/nginx.conf
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/php-fpm.conf     /usr/local/etc/php-fpm.d/www.conf
 COPY docker/opcache.ini      /usr/local/etc/php/conf.d/opcache.ini
 COPY docker/start.sh         /start.sh
 
+# ── Permissions ───────────────────────────────────────────────────────────────
 RUN chmod +x /start.sh \
     && mkdir -p storage/framework/{cache/data,sessions,views,testing} \
                storage/logs \
